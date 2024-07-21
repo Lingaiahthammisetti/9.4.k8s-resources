@@ -9,12 +9,12 @@ spec:
     image: nginx
     env:
     -name: course
-      valueFrom:
+     valueFrom:
         configMapKeyRef:
            name: daws78s
            key: course
     -name: trainer
-      valueFrom:
+     valueFrom:
         configMapKeyRef:
            name: daws78s
            key: trainer
