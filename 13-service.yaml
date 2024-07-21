@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: nginx
 spec:
-  selectors:
+  selector:
     name: frontend
     project: expense
     component: frontend
