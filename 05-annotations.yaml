@@ -1,7 +1,7 @@
 kind: Pod
 apiVersion: v1
 metadata:
-  annotations
+  name: annotations
   labels:
     course: k8
     trainer: sivakumar
@@ -12,4 +12,3 @@ spec:
   containers:
   - name: nginx
     image: nginx
-    
