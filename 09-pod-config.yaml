@@ -8,13 +8,13 @@ spec:
   - name: nginx
     image: nginx
     env:
-    -name: course
-     valueFrom:
+    - name: course
+      valueFrom:
         configMapkeyRef:
            name: daws78s
            key: course
-    -name: trainer
-     valueFrom:
+    - name: trainer
+      valueFrom:
         configMapkeyRef:
            name: daws78s
            key: trainer
