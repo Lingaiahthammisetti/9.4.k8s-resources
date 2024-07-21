@@ -33,7 +33,7 @@ spec:
   - name: nginx
     image: nginx
     envFrom:
-    - configMapKeyRef:
+    - configMapRef:
         name: daws78s
        
 
