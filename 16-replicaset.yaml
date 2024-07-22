@@ -14,14 +14,14 @@ spec:
       tier: frontend
       app: nginx
 #below is pod definition
-template:
- metadata:
-   labels:
-     tier: frontend
-     app: nginx
-     project: some-project
- spec:
-   containers:
-   - name: nginx
-     image: nginx:stable-perl
+  template:
+    metadata:
+     labels:
+       tier: frontend
+       app: nginx
+       project: some-project
+    spec:
+       containers:
+       - name: nginx
+         image: nginx:stable-perl
 
