@@ -9,7 +9,7 @@ data:
         modules:
           path: /usr/share/filebeat/modules.d/*.yaml
           reload:
-            enabled: "true"
+            enabled:true
       modules:
       - module: nginx
         access:
