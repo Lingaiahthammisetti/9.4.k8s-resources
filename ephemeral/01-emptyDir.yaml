@@ -20,32 +20,32 @@ data:
     elasticsearch:
       hosts: ["elasticsearch:9200"]
 
----
-kind: Pod
-apiVersion: v1
-metadata:
-  name: nginx
-spec:
-  containers:
-  - name: nginx
-    image: nginx
-    volumeMounts:
-    - name: nginx-logs
-      mountPath: /var/log/nginx
-  - name: filebeat
-    image: docker.elastic.co/beats/filebeat:7.5.0
-    volumeMounts:
-    - name: filebeat-config
-      mountPath: /usr/share/filebeat/filebeat.yaml
-      subPath: filebeat.yaml
-    - name: nginx-logs
-      mountPath: /var/log/nginx
-  volumes:
-    - name: nginx-logs
-      emptyDir: {}
-    - name: filebeat-config
-      configMap:
-        name: filebeat
-        items:
-          - key: filebeat.yml
-            path: filebeat.yml
+# ---
+# kind: Pod
+# apiVersion: v1
+# metadata:
+#   name: nginx
+# spec:
+#   containers:
+#   - name: nginx
+#     image: nginx
+#     volumeMounts:
+#     - name: nginx-logs
+#       mountPath: /var/log/nginx
+#   - name: filebeat
+#     image: docker.elastic.co/beats/filebeat:7.5.0
+#     volumeMounts:
+#     - name: filebeat-config
+#       mountPath: /usr/share/filebeat/filebeat.yaml
+#       subPath: filebeat.yaml
+#     - name: nginx-logs
+#       mountPath: /var/log/nginx
+#   volumes:
+#     - name: nginx-logs
+#       emptyDir: {}
+#     - name: filebeat-config
+#       configMap:
+#         name: filebeat
+#         items:
+#           - key: filebeat.yml
+#             path: filebeat.yml
