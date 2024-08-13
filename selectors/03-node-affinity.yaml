@@ -6,8 +6,7 @@ spec:
   affinity:
     nodeAffinity:
       preferedDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - weight: 1
+      - weight: 1
           preference:
             matchExpressions:
             - key: project
