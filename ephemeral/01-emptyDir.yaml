@@ -1,21 +1,42 @@
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: filebeat
+# data:
+#   filebeat.yaml: |
+#     filebeat:
+#       config:
+#         modules:
+#           path: /usr/share/filebeat/modules.d/*.yaml
+#           reload:
+#             enabled: "true"
+#       modules:
+#       - module: nginx
+#         access:
+#           var.paths: ["/var/log/nginx/access.log*"]
+#         error:
+#           var.paths: ["/var/log/nginx/error.log"]
+#   output:
+#     elasticsearch:
+#       hosts: ["elasticsearch:9200"]
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: filebeat
 data:
-  filebeat.yaml: |
+  filebeat.yaml
     filebeat:
       config:
         modules:
           path: /usr/share/filebeat/modules.d/*.yaml
           reload:
-            enabled: "true"
-      modules:
-      - module: nginx
-        access:
-          var.paths: ["/var/log/nginx/access.log*"]
-        error:
-          var.paths: ["/var/log/nginx/error.log"]
+            enabled:true
+    modules:
+    - module:nginx
+      access:
+        var.paths: ["/var/log/nginx/access.log"]
+      error:
+        var.paths: ["/var/log/nginx/error.log"]
   output:
     elasticsearch:
       hosts: ["elasticsearch:9200"]
