@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: filebeat
 data:
-  filebeat.yaml
+  filebeat.yaml |
     filebeat:
       config:
         modules:
