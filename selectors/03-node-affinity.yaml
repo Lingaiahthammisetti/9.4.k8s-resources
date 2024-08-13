@@ -5,7 +5,7 @@ metadata:
 spec:
   affinity:
     nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
+      preferedDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
         - weight: 1
           preference:
