@@ -10,12 +10,12 @@ data:
           path: /usr/share/filebeat/modules.d/*.yaml
           reload:
             enabled:true
-    modules:
-    - module:nginx
-      access:
-        var.paths: ["/var/log/nginx/access.log"]
-      error:
-        var.paths: ["/var/log/nginx/error.log"]
+      modules:
+      - module: nginx
+        access:
+          var.paths: ["/var/log/nginx/access.log*"]
+        error:
+          var.paths: ["/var/log/nginx/error.log"]
   output:
     elasticsearch:
       hosts: ["elasticsearch:9200"]
