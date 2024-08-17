@@ -29,9 +29,9 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: nginx-static
-  labels:
-    purpose: ebs-static
-    project: expense
+  # labels:
+  #   purpose: ebs-static
+  #   project: expense
 spec:
   containers:
   - name: nginx
@@ -39,10 +39,13 @@ spec:
     volumeMounts:
     - name: persistent-storage
       mountPath: /usr/share/nginx/html
-  nodeSelector:
-    topology.kubernetes.io/zone: us-east-1c
-  storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
-  volumeName: ebs-static-claim
+  # nodeSelector:
+  #   topology.kubernetes.io/zone: us-east-1c
+  #storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
+  volumes:
+  - name: persistent-storage
+    persistentVolumeClaim:
+      claimName: ebs-static-claim
 #  ---
 
 # apiVersion: v1
