@@ -24,29 +24,29 @@ spec:
   resources:
     requests:
       storage: 5Gi
-# ---
-# apiVersion: v1
-# kind: Pod
-# metadata:
-#   name: nginx-static
-#   labels:
-#     purpose: ebs-static
-#     project: expense
-# spec:
-#   containers:
-#   - name: nginx # this cotnainer has root acccess, bec its download form internet.
-#     image: nginx
-#     volumeMounts:
-#     - name: persistent-storage
-#       mountPath: /usr/share/nginx/html
-#   # nodeSelector:
-#   #   topology.kubernetes.io/zone: us-east-1c
-#   #storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
-#   volumes:
-#   - name: persistent-storage
-#     persistentVolumeClaim:
-#       claimName: ebs-static
-#     #To test above application, we can use load balancer service.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-static
+  labels:
+    purpose: ebs-static
+    project: expense
+spec:
+  containers:
+  - name: nginx # this cotnainer has root acccess, bec its download form internet.
+    image: nginx
+    volumeMounts:
+    - name: persistent-storage
+      mountPath: /usr/share/nginx/html
+  # nodeSelector:
+  #   topology.kubernetes.io/zone: us-east-1c
+  #storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
+  volumes:
+  - name: persistent-storage
+    persistentVolumeClaim:
+      claimName: ebs-static
+    #To test above application, we can use load balancer service.
 
 #  ---
 # apiVersion: v1
