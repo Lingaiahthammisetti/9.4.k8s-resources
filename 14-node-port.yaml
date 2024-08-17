@@ -15,4 +15,4 @@ spec:
   - protocol: TCP
     port: 80 #service-port
     targetPort: 80 #target-port
-   # nodePort: 32760 # Here is fixed nodeport value.
+    nodePort: 32760 # Here is fixed nodeport value.
