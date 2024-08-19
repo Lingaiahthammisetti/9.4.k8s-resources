@@ -41,8 +41,8 @@ spec:
     volumeMounts:
     - name: persistent-storage
       mountPath: /usr/share/nginx/html
-  # nodeSelector:
-  #   topology.kubernetes.io/zone: us-east-1c
+  nodeSelector:
+    topology.kubernetes.io/zone: us-east-1f
   #storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
   volumes:
   - name: persistent-storage
