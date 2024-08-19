@@ -10,45 +10,46 @@ spec:
   csi:
     driver: ebs.csi.aws.com
     fsType: ext4
-    volumeHandle: vol-0cd7078be4aa8492a
+    volumeHandle: vol-02eb0e09a0b20d7f6
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ebs-static
-spec:
-  storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
-  volumeName: ebs-static
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: nginx-static
-  labels:
-    purpose: ebs-static
-    project: expense
-spec:
-  containers:
-  - name: nginx # this cotnainer has root acccess, bec its download form internet.
-    image: nginx
-    volumeMounts:
-    - name: persistent-storage
-      mountPath: /usr/share/nginx/html
-  nodeSelector:
-    topology.kubernetes.io/zone: us-east-1b
-  #storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
-  volumes:
-  - name: persistent-storage
-    persistentVolumeClaim:
-      claimName: ebs-static
-    #To test above application, we can use load balancer service.
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: ebs-static-claim
+# spec:
+#   storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
+#   volumeName: ebs-static
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 5Gi
+# ---
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: nginx-static
+#   labels:
+#     purpose: ebs-static
+#     project: expense
+# spec:
+#   containers:
+#   - name: nginx # this cotnainer has root acccess, bec its download form internet.
+#     image: nginx
+#     volumeMounts:
+#     - name: persistent-storage
+#       mountPath: /usr/share/nginx/html
+#   # nodeSelector:
+#   #   topology.kubernetes.io/zone: us-east-1c
+#   #storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
+#   volumes:
+#   - name: persistent-storage
+#     persistentVolumeClaim:
+#       claimName: ebs-static-claim
+
 
 #  ---
+# #To test above application, we can use load balancer service.
 # apiVersion: v1
 # kind: Service
 # metadata:
