@@ -11,6 +11,7 @@ spec:
     driver: ebs.csi.aws.com
     fsType: ext4
     volumeHandle: vol-02eb0e09a0b20d7f6
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -24,6 +25,7 @@ spec:
   resources:
     requests:
       storage: 5Gi
+
 ---
 apiVersion: v1
 kind: Pod
@@ -46,8 +48,10 @@ spec:
   - name: persistent-storage
     persistentVolumeClaim:
       claimName: ebs-static-claim
- ---
+
 #To test above application, we can use load balancer service.
+
+---
 apiVersion: v1
 kind: Service
 metadata:
