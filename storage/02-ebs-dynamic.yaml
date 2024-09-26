@@ -16,7 +16,7 @@ kind: Pod
 metadata:
   name: nginx-dynamic
   labels:
-    purpose: ebs-static
+    purpose: ebs-dynamic
     project: expense
 spec:
   containers:
@@ -32,3 +32,21 @@ spec:
     persistentVolumeClaim:
       claimName: ebs-dynamic-claim
  
+
+
+ #To test above application, we can use load balancer service.
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-lb
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: ebs-dynamic
+    project: expense
+  ports:
+  - protocol: TCP
+    port: 80 # service port
+    targetPort: 80
