@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: "fs-01b185d11e4ecdbdd" # add your own volume
+    volumeHandle: "fs-077a4f98e18af8429" # add your own volume
 
 ---
 apiVersion: v1
@@ -32,7 +32,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: efs-app
+  name: efs-nginx
   labels:
     purpose: efs-static
 spec:
