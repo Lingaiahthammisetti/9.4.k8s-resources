@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: efs-dyanmic #Empty string must be explicity set otherwise default StorageClass will be set.
+  storageClassName: efs-dynamic #Empty string must be explicity set otherwise default StorageClass will be set.
   resources:
     requests:
       storage: 5Gi
