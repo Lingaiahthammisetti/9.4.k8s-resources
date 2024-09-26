@@ -66,3 +66,30 @@ spec:
     port: 80 # service port
     targetPort: 80
 
+
+
+
+
+# #Pod with Node Selector  
+
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: nginx-static
+#   labels:
+#     purpose: ebs-static
+#     project: expense
+# spec:
+#   containers:
+#   - name: nginx # this cotnainer has root acccess, bec its download form internet.
+#     image: nginx
+#     volumeMounts:
+#     - name: persistent-storage
+#       mountPath: /usr/share/nginx/html
+#   nodeSelector:   
+#     topology.kubernetes.io/zone: us-east-1c
+#   #storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
+#   volumes:
+#   - name: persistent-storage
+#     persistentVolumeClaim:
+#       claimName: ebs-static-claim
