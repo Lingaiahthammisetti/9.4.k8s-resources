@@ -10,7 +10,7 @@ spec:
   csi:
     driver: ebs.csi.aws.com
     fsType: ext4
-    volumeHandle: vol-06e1f55507e2cdd5a    #vol-02eb0e09a0b20d7f6 #This volume in us-east-1c
+    volumeHandle: vol-0ff1c54ac06f5d442    #vol-02eb0e09a0b20d7f6 #This volume in us-east-1c
 
 ---
 apiVersion: v1
@@ -42,7 +42,7 @@ spec:
     - name: persistent-storage
       mountPath: /usr/share/nginx/html
   nodeSelector:
-    topology.kubernetes.io/zone: us-east-1f
+    topology.kubernetes.io/zone: us-east-1c
   #storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
   volumes:
   - name: persistent-storage
