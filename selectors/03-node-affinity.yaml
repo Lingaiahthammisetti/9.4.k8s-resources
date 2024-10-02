@@ -7,13 +7,12 @@ spec:
     nodeAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
       - weight: 1
-          preference:
-            matchExpressions:
-            - key: project
-              operator: In
-              values:
-              - expense
+        preference:
+          matchExpressions:
+          - key: project
+            operator: In
+            values:
+            - expense
   containers:
   - name: with-node-affinity
     image: nginx
-    
