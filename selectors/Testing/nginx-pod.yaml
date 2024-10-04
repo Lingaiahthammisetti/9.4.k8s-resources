@@ -6,3 +6,8 @@ spec:
   containers:
   - name: nginx
     image: nginx
+  tolerations:
+  - key: "nginx-node"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
