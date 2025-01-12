@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pod-config
+  name: pod-config-a
 spec:
   containers:
   - name: nginx
     image: nginx
     envFrom:
     - configMapRef:
-        name: daws78s # This is configmap file name
+        name: daws78s-a # This is configmap file name
