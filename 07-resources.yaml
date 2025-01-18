@@ -9,10 +9,10 @@ spec:
     resources:
      #soft limit
      requests:
-      cpu: "512Mi"
-      memory: "250m"
+      cpu: "250m"
+      memory: "512Mi"
       #limits should be atleast or more than requests i.e hard limit.
      limits:
-      cpu: "1Gi"
-      memory: "500m"
+      cpu: "500m"
+      memory: "1Gi"
 
