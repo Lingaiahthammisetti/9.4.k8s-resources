@@ -8,7 +8,7 @@ metadata:
     tier: frontend
 spec:
 #modify replicas according to your case
-  replicas: 3
+  replicas: 20
   selector:
     matchLabels:
       tier: frontend
