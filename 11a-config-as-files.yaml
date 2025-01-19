@@ -8,7 +8,7 @@ spec:
     image: nginx
     volumeMounts:
     - name: config-volume
-      mountPath: /etc/config
+      mountPath: /usr/share/nginx/html
   volumes:
   - name: config-volume
     configMap:
