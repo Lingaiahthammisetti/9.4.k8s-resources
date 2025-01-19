@@ -10,34 +10,18 @@ spec:
     - name: course
       valueFrom:
         configMapKeyRef:
-           name: daws78s
-           key: course
+        name: daws78s
+        key: course
     - name: trainer
       valueFrom:
         configMapKeyRef:
-           name: daws78s
-           key: trainer
+          name: daws78s
+          key: trainer
     - name: github-link
       valueFrom:
         configMapKeyRef:
-           name: daws78s
-           key: github
+          name: daws78s
+          key: github
 
-       
-
-
-
- 
-# apiVersion: v1
-# kind: Pod
-# metadata:
-#   name: pod-config
-# spec:
-#   containers:
-#   - name: nginx
-#     image: nginx
-#     envFrom:
-#     - configMapRef:
-#         name: daws78s
        
 
