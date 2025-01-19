@@ -4,8 +4,8 @@ metadata:
   name: my-config-pod
 spec:
   containers:
-  - name: nginx
-    image: nginx
+    - name: nginx
+      image: nginx
     volumeMounts:
     - name: config-volume
       mountPath: /usr/share/nginx/html
