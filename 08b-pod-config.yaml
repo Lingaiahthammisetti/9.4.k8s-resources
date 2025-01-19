@@ -4,24 +4,21 @@ metadata:
   name: pod-config-individual
 spec:
   containers:
-  - name: nginx
-    image: nginx
-    env:
-    - name: course
-      valueFrom:
-        configMapKeyRef:
-        name: daws78s
-        key: course
-    - name: trainer
-      valueFrom:
-        configMapKeyRef:
-          name: daws78s
-          key: trainer
-    - name: github-link
-      valueFrom:
-        configMapKeyRef:
-          name: daws78s
-          key: github
-
-       
-
+    - name: nginx
+      image: nginx
+      env:
+        - name: course
+          valueFrom:
+            configMapKeyRef:
+              name: daws78s
+              key: course
+        - name: trainer
+          valueFrom:
+            configMapKeyRef:
+              name: daws78s
+              key: trainer
+        - name: github-link
+          valueFrom:
+            configMapKeyRef:
+              name: daws78s
+              key: github

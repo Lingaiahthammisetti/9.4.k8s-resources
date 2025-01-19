@@ -4,8 +4,8 @@ metadata:
   name: pod-config-single-doc
 spec:
   containers:
-  - name: nginx
-    image: nginx
-    envFrom:
-    - configMapRef:
-        name: daws78s # This is configmap file name
+    - name: nginx
+      image: nginx
+      envFrom:
+        - configMapRef:
+            name: daws78s # This is configmap file name
