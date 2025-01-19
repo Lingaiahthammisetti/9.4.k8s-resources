@@ -17,7 +17,7 @@ spec:
         configMapKeyRef:
            name: daws78s
            key: trainer
-    - name: github link
+    - name: github-link
       valueFrom:
         configMapKeyRef:
            name: daws78s
