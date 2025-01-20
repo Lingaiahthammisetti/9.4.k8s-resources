@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ebs-static
+  name: ebs-static-pv
 spec:
   accessModes:
   - ReadWriteOnce
@@ -16,10 +16,10 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ebs-static-claim
+  name: ebs-static-pvc
 spec:
   storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
-  volumeName: ebs-static
+  volumeName: ebs-static-pv
   accessModes:
     - ReadWriteOnce
   resources:
@@ -30,7 +30,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-static
+  name: nginx-static-pod
   labels:
     purpose: ebs-static
     project: expense
@@ -47,7 +47,7 @@ spec:
   volumes:
   - name: persistent-storage
     persistentVolumeClaim:
-      claimName: ebs-static-claim
+      claimName: ebs-static-pvc
 
 #To test above application, we can use load balancer service.
 
@@ -55,7 +55,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-lb
+  name: ebs-static-lb
 spec:
   type: LoadBalancer
   selector:

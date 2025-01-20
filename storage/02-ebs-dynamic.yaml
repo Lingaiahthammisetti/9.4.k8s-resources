@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ebs-dynamic-claim
+  name: ebs-dynamic-pvc
 spec:
   storageClassName: "expense-ebs-sc" #Empty string must be explicity set otherwise default StorageClass will be set.
   accessModes:
@@ -14,7 +14,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-dynamic
+  name: nginx-dynamic-pod
   labels:
     purpose: ebs-dynamic
     project: expense
@@ -30,7 +30,7 @@ spec:
   volumes:
   - name: persistent-storage
     persistentVolumeClaim:
-      claimName: ebs-dynamic-claim
+      claimName: ebs-dynamic-pvc
  
 
 
@@ -40,7 +40,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-lb
+  name: ebs-dynamic-lb
 spec:
   type: LoadBalancer
   selector:

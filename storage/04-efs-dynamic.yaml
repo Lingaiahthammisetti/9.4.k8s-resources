@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: efs-dynamic
+  name: efs-dynamic-pvc
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: efs-dynamic #Empty string must be explicity set otherwise default StorageClass will be set.
+  storageClassName: efs-dynamic-sc #Empty string must be explicity set otherwise default StorageClass will be set.
   resources:
     requests:
       storage: 5Gi
@@ -14,7 +14,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: efs-dynamic
+  name: efs-dynamic-pod
   labels:
     purpose: efs-dynamic
 spec:
@@ -27,12 +27,12 @@ spec:
   volumes:
   - name: persistent-storage
     persistentVolumeClaim:
-      claimName: efs-dynamic
+      claimName: efs-dynamic-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: efs-dynamic
+  name: efs-dynamic-lb
 spec:
   type: LoadBalancer
   selector:

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: efs-static
+  name: efs-static-pv
 spec:
   capacity:
     storage: 5Gi
@@ -18,12 +18,12 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: efs-static-claim
+  name: efs-static-pvc
 spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: ""
-  volumeName: efs-static
+  volumeName: efs-static-pv
   resources:
     requests:
       storage: 2Gi
@@ -32,7 +32,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: efs-nginx
+  name: efs-nginx-pod
   labels:
     purpose: efs-static
 spec:
@@ -45,13 +45,13 @@ spec:
   volumes:
   - name: persistent-storage
     persistentVolumeClaim:
-      claimName: efs-static-claim
+      claimName: efs-static-pvc
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: efs-static
+  name: efs-static-lb
 spec:
   type: LoadBalancer
   selector:
