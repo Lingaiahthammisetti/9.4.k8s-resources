@@ -8,7 +8,7 @@ spec:
   storageClassName: efs-dynamic-sc #Empty string must be explicity set otherwise default StorageClass will be set.
   resources:
     requests:
-      storage: 5Gi
+      storage: 10Gi
 
 ---
 apiVersion: v1
@@ -19,15 +19,15 @@ metadata:
     purpose: efs-dynamic
 spec:
   containers:
-  - name: nginx
-    image: nginx
-    volumeMounts:
-    - name: persistent-storage
-      mountPath: /usr/share/nginx/html
+    - name: nginx
+      image: nginx
+      volumeMounts:
+        - name: persistent-storage
+          mountPath: /usr/share/nginx/html
   volumes:
-  - name: persistent-storage
-    persistentVolumeClaim:
-      claimName: efs-dynamic-pvc
+    - name: persistent-storage
+      persistentVolumeClaim:
+        claimName: efs-dynamic-pvc
 ---
 apiVersion: v1
 kind: Service
