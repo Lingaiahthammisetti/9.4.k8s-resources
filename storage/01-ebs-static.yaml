@@ -41,8 +41,8 @@ spec:
     volumeMounts:
     - name: persistent-storage
       mountPath: /usr/share/nginx/html
-  nodeSelector:   # if instances and volume, pod in same availability zone, no need to use nodeSelector, but it not sure every time instance created.
-    topology.kubernetes.io/zone: us-east-1b
+  # nodeSelector:   # if instances and volume, pod in same availability zone, no need to use nodeSelector, but it not sure every time instance created.
+  #   topology.kubernetes.io/zone: us-east-1b
   #storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
   volumes:
   - name: persistent-storage
