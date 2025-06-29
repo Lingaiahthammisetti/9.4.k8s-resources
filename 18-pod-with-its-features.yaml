@@ -1,0 +1,65 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nginx
+  labels:
+    name: fronend
+    project: expense
+    component: frontend
+    environment: dev
+  annotations:
+    kubernetes.io/created-by: 'sivakumar'
+    jenkins.build.url: 'https://jenkins.lingaiah.online/expense/job/backend/54'
+spec:
+  containers:
+  # - name: alma
+  #   image: "almalinux:9"
+  #   command: ["sleep"," 2000" ]
+  - name: nginx
+    image: nginx
+    env:
+    - name: course
+      value: 'kubernetes'
+    - name: duration
+      value: '20hours'
+    resources:
+     #soft limit
+      requests:
+        memory: "512Mi"
+        cpu: "250m"
+      #limits should be atleast or more than requests i.e hard limit.
+      limits:
+        memory: "1Gi"
+        cpu: "500m"
+      envFrom:
+      - configMapRef:
+          name: daws78s # This is configmap file name
+      envFrom:
+        - secretRef:
+            name: secret-doc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+
