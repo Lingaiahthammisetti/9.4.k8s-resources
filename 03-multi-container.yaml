@@ -1,3 +1,17 @@
+# kind: Pod
+# apiVersion: v1
+# metadata:
+#   name: multi-container
+# spec:
+#   containers:
+#   - name: nginx
+#     image: nginx
+#   - name: alma
+#     image: "almalinux:9"
+#     command: ["sleep"," 2000" ]
+
+  #We will test using curl localhost in both containers.
+
 kind: Pod
 apiVersion: v1
 metadata:
@@ -6,6 +20,16 @@ spec:
   containers:
   - name: nginx
     image: nginx
+    volumeMounts:
+      - name: shared-volume
+        mountPath: /hello-dir
   - name: alma
-    image: "almalinux:9"
-    command: ["sleep"," 2000" ]
+    image: almalinux:9
+    command: ["sleep", "2000"]
+    volumeMounts:
+      - name: shared-volume
+        mountPath: /hello-dir
+  volumes:
+    - name: shared-volume
+      emptyDir: {}
+
