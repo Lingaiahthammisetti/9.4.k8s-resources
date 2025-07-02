@@ -10,5 +10,5 @@ spec:
     environment: dev
   ports:
   - protocol: TCP
-    port: 80 #service-port
-    targetPort: 80 #target-port
+    port: 80 #service-port like load balancer
+    targetPort: 80 #target-port means pod port or container port
