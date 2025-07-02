@@ -7,11 +7,13 @@ spec:
   type: LoadBalancer
   selector:
     name: frontend
-    project: expense
-    component: frontend
-    environment: dev
+    # project: expense
+    # component: frontend
+    # environment: dev
   ports:
   - protocol: TCP
     port: 80 #service-port
     targetPort: 80 #target-port
     nodePort: 32761
+
+#Note:  all labels values of selector from service need to match with pod label values. Pod can contain additional values, but service.

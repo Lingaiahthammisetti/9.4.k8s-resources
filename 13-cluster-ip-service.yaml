@@ -6,9 +6,11 @@ spec:
   selector:
     name: frontend
     project: expense
-    component: frontend
-    environment: dev
+    # component: frontend
+    # environment: dev
   ports:
   - protocol: TCP
     port: 80 #service-port like load balancer
     targetPort: 80 #target-port means pod port or container port
+
+#Note:  all labels values of selector from service need to match with pod label values. Pod can contain additional values, but service.

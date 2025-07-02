@@ -7,8 +7,12 @@ metadata:
     project: expense
     component: frontend
     environment: dev
+    author: lingaiah
+    approver: siva
 spec:
   containers:
   - name: nginx
     image: nginx
     
+
+#Note:  all labels values of selector from service need to match with pod label values. Pod can contain additional values, but service.

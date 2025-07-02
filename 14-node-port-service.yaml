@@ -9,9 +9,11 @@ spec:
     name: frontend
     project: expense
     component: frontend
-    environment: dev
+    # environment: dev
   ports:
   - protocol: TCP
     port: 80 #service-port
     targetPort: 80 #target-port
     nodePort: 32760 # Here is fixed nodeport value.
+
+#Note:  all labels values of selector from service need to match with pod label values. Pod can contain additional values, but service.
