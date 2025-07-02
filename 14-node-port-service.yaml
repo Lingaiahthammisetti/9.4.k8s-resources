@@ -1,11 +1,10 @@
-
-#LoadBalancer
+#Node port
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-lb
+  name: nginx-np
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     name: frontend
     project: expense
@@ -15,4 +14,4 @@ spec:
   - protocol: TCP
     port: 80 #service-port
     targetPort: 80 #target-port
-    nodePort: 32761
+    nodePort: 32760 # Here is fixed nodeport value.

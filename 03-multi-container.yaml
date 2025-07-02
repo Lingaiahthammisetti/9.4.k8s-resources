@@ -12,6 +12,7 @@
 
   #We will test using curl localhost in both containers.
 
+# How to prove multiple containers in a pod share storage and network?
 kind: Pod
 apiVersion: v1
 metadata:
@@ -33,3 +34,7 @@ spec:
     - name: shared-volume
       emptyDir: {}
 
+#kubectl exec multi-container -c alma -- cat /hello-dir/hello.txt
+# How do you prove both containers share same network?
+# kubectl exec -it multi-container -c nginx -- hostname -i
+# kubectl exec -it multi-container -c alma -- hostname -i
