@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-config-single-doc
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      envFrom:
+        - configMapRef:
+            name: daws78s # This is configmap file name
+
+
+# kubectl apply -f 08a-config-config.yaml
+# kubectl get pod-config-single-doc
+# kubectl describe pod pod-config-single-doc

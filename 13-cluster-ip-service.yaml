@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-cluster-ip
+spec:
+  selector:
+    name: frontend
+    project: expense
+    # component: frontend
+    # environment: dev
+  ports:
+  - protocol: TCP
+    port: 80 #service-port like load balancer
+    targetPort: 80 #target-port means pod port or container port
+
+#Note:  all labels values of selector from service need to match with pod label values. Pod can contain additional values, but service.
+
+
+# kubectl apply -f 13-cluster-ip-service.yaml
+# kubectl get svc
+# kubectl describe svc nginx-cluster-ip

@@ -1,0 +1,21 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: resources
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    resources:
+     #soft limit
+      requests:
+        memory: "512Mi"
+        cpu: "250m"
+      #limits should be atleast or more than requests i.e hard limit.
+      limits:
+        memory: "1Gi"
+        cpu: "500m"
+    
+# kubectl apply -f 07-resources.yaml
+# kubectl get pods
+# kubectl describe pod resources

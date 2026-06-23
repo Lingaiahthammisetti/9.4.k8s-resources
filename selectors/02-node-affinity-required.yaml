@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: with-node-affinity
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  tolerations:
+  - key: "project"
+    operator: "Equal"
+    value: "expense"
+    effect: "NoSchedule"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: project
+            operator: In
+            values:
+            - expense
+
+
+# To make taints + tolerations + affinity work together:
+
+# Taint the node:
+# kubectl taint node my-node project=expense:NoSchedule
+
+# Label the node:
+# kubectl label node my-node project=expense
+
+
+
+
+# First apply taint on specific node and then apply tolerations on it.
+# kubectl get nodes
+# kubectl taint nodes ip-192-168-42-153.ec2.internal project=expense:NoSchedule
+

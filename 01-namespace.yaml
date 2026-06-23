@@ -1,0 +1,11 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: expense
+  labels:
+    name: expense
+    environment: dev
+    
+# kubectl apply -f 01-namespace.yaml
+# kubectl get pods
+# kubectl describe ns expense

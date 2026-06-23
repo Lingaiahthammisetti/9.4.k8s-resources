@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx
+  #these labels belongs to replicaset resource.
+  labels:
+    environment: dev
+    team: web-team
+spec:
+#modify replicas according to your case
+  replicas: 4
+  selector:
+    matchLabels:
+      tier: frontend
+      app: nginx
+#below is pod definition
+  template:
+    metadata:
+     labels:
+       tier: frontend # ✅ required by selector
+       app: nginx # ✅ required by selector
+       project: some-project  # ✅ extra label
+    spec:
+       containers:
+       - name: nginx
+         image: nginx:stable-perl
+
+
+
+# Summary Rules
+# Pod labels must match all keys in matchLabels	✅ Required
+# Pod can have extra labels beyond matchLabels	✅ Allowed
+# If Pod misses any selector label, ReplicaSet won't manage it	❌ Not allowed
+
+# kubectl apply -f 16-replicatset.yaml
+# kubectl get replicatset
+# kubectl describe replicaset nginx

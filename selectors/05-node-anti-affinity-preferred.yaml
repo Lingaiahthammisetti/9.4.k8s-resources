@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: with-node-anti-affinity-preferred
+spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: project
+            operator: NotIn
+            values:
+            - expense
+  containers:
+  - name: nginx-with-node-affinity
+    image: nginx
+
+#Node Anti affinity also created using nodeAffinity only.

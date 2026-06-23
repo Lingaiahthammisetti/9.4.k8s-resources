@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  #these labels are deployment related labels.
+  labels:
+    environment: dev
+    team: web-team
+spec:
+  replicas: 20
+  selector:
+    matchLabels:
+      tier: web
+      app: nginx
+      project: test-project
+#below is pod definition
+  template:
+    metadata:
+     labels:
+       tier: web
+       app: nginx
+       project: test-project
+       extra-key: extra-value
+    spec:
+       containers:
+       - name: nginx
+         image: nginx
+
+# kubectl apply -f 17-deployment.yaml
+# kubectl get deployment
+# kubectl describe deployment nginx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+

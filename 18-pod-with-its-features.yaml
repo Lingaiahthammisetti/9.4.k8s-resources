@@ -1,0 +1,71 @@
+
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: expense
+  labels:
+    name: expense
+    environment: dev
+
+
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nginx
+  labels:
+    name: frontend 
+    project: expense
+    component: frontend
+    environment: dev
+  annotations:
+    kubernetes.io/created-by: 'sivakumar'
+    jenkins.build.url: 'https://jenkins.lingaiah.online/expense/job/backend/54'
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      env:
+        - name: course
+          value: 'kubernetes'
+        - name: duration
+          value: '20hours'
+      resources:
+        requests:
+          memory: "512Mi"
+          cpu: "250m"
+        limits:
+          memory: "1Gi"
+          cpu: "500m"
+      envFrom:
+        - configMapRef:
+            name: daws78s   # ConfigMap name
+        - secretRef:
+            name: secret-doc  # Secret name
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+

@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-dynamic-pvc
+spec:
+  storageClassName: "expense-ebs-sc" #Empty string must be explicity set otherwise default StorageClass will be set.
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 4Gi
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-dynamic-pod
+  labels:
+    purpose: ebs-dynamic
+    project: expense
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: persistent-storage
+      mountPath: /usr/share/nginx/html
+  # nodeSelector:
+  #   topology.kubernetes.io/zone: us-east-1c
+  volumes:
+  - name: persistent-storage
+    persistentVolumeClaim:
+      claimName: ebs-dynamic-pvc
+ 
+
+
+ #To test above application, we can use load balancer service.
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ebs-dynamic-lb
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: ebs-dynamic
+    project: expense
+  ports:
+  - protocol: TCP
+    port: 80 # service port
+    targetPort: 80

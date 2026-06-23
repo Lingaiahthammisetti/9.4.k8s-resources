@@ -1,0 +1,13 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+
+
+# kubectl apply -f 02-pod.yaml
+# kubectl get pods
+# kubectl describe pod nginx

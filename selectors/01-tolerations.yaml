@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-tolerations
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: Always #keep this as always
+  tolerations:
+  - key: "project"
+    operator: "Equal"
+    value: "expense"
+    effect: "NoSchedule"
+  - key: "project"
+    operator: "Exists"
+    effect: "NoSchedule"
+
+# First apply taint on specific node and then apply tolerations on it.
+# kubectl get nodes
+# kubectl taint nodes ip-192-168-42-153.ec2.internal project=expense:NoSchedule
+
+# # 🧠 Important Facts
+# Tolerations do not attract pods to nodes. They only permit scheduling.
+# If no toleration matches a taint, the pod will never be scheduled to that node.
+# If a toleration does match, the scheduler then continues to evaluate:
+# Node labels / selectors
+# Node affinity/anti-affinity
+# Resource availability (CPU, memory, etc.)
+# Pod affinity/anti-affinity
+# Constraints like topology spread, priority, etc.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-selector-demo
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: Always
+  nodeSelector:
+    disktype: ssd
+
+# kubectl label nodes <your-node-name> disktype=ssd
+# kubectl apply -f your-pod.yaml
+# kubectl get pods -o wide
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-selector-demo-1
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: Always
+  nodeSelector:
+    disktype: ssd
+  tolerations:
+  - key: "key1"
+    operator: "Equal"
+    value: "value1"
+    effect: "NoExecute"
+  - key: "key1"
+    operator: "Equal"
+    value: "value1"
+    effect: "NoSchedule"
+
+# ✅ To Make This Work
+# # Ensure the target node has:
+# Label: disktype=ssd
+# kubectl label nodes <node-name> disktype=ssd
+
+# # Optional Taint (depending on what you're testing):
+# kubectl taint nodes <node-name> key1=value1:NoSchedule
+# kubectl taint nodes <node-name> key1=value1:NoExecute

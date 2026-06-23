@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ebs-static-pv
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 100Gi
+  csi:
+    driver: ebs.csi.aws.com
+    fsType: ext4
+    volumeHandle: vol-02d629b73c35b5d3a    #vol-02eb0e09a0b20d7f6 #This volume in us-east-1c
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-static-pvc
+spec:
+  storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
+  volumeName: ebs-static-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-static-pod
+  labels:
+    purpose: ebs-static
+    project: expense
+spec:
+  containers:
+  - name: nginx # this cotnainer has root acccess, bec its download form internet.
+    image: nginx
+    volumeMounts:
+    - name: persistent-storage
+      mountPath: /usr/share/nginx/html
+  # nodeSelector:   # if instances and volume, pod in same availability zone, no need to use nodeSelector, but it not sure every time instance created.
+  #   topology.kubernetes.io/zone: us-east-1b
+  #storageClassName: "" #Empty string must be explicity set otherwise default StorageClass will be set.
+  volumes:
+  - name: persistent-storage
+    persistentVolumeClaim:
+      claimName: ebs-static-pvc
+
+#To test above application, we can use load balancer service.
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ebs-static-lb
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: ebs-static
+    project: expense
+  ports:
+  - protocol: TCP
+    port: 80 # service port
+    targetPort: 80
+

@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-dynamic-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: efs-dynamic-sc #Empty string must be explicity set otherwise default StorageClass will be set.
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: efs-dynamic-pod
+  labels:
+    purpose: efs-dynamic
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+        - name: persistent-storage
+          mountPath: /usr/share/nginx/html
+  volumes:
+    - name: persistent-storage
+      persistentVolumeClaim:
+        claimName: efs-dynamic-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: efs-dynamic-lb
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: efs-dyanamic
+  ports:
+  - protocol: TCP
+    port: 80 # service port
+    targetPort: 80
+
