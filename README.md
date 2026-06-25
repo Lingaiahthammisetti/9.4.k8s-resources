@@ -1,3 +1,35 @@
+
+
+```
+1. Pod is not running -> check pod status( kubectl get pods -A, -A means Short for --all-namespaces. )
+
+2. Pod in CrashLoopBackOff -> check pod logs ( kubectl logs <pod-name> -n <ns> )
+
+3. Previous container logs -> check container logs ( kubectl logs <pod-name> -n <ns> --previous )
+
+4. Pod stuck in ContainerCreating -> Describe pod ( kubectl describe pod <pod-name> -n <ns> )
+
+5. ImagePullBackOff error -> check events ( kubectl describe pod <pod-name> -n <ns> | grep -i image )
+
+6. Pod is Pending -> see why pod is pending ( kubectl describe pod <pod-name> -n <ns> )
+
+7. Insufficient resources (CPU/Memory) -> Check cluster resources ( kubectl top nodes )
+
+8. Node is Not Ready -> Check node status ( kubectl get nodes )
+
+9. High CPU/Memory usage -> Check usage ( kubectl top pods -A )
+
+10. Pod OOMKilled -> check pod events (kubectl describe pod <pod-name> -n <ns> | grep -i oom ) 
+```
+
+
+
+
+
+
+
+
+
 * Created repo for kubernetes objects and its understanding.
 
 Namespace, pod, mutli-containers, labels, annotations, env, resource limits, configmap, pod-configmap, secret, pod-secrets, config-as-file-volume, secret-as-file-volume, cluster, node-port, load balancer, nginx-pod, replicatset, deployment. 
